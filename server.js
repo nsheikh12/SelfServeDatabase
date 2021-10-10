@@ -1,11 +1,12 @@
-// require('dotenv').config()
+require('dotenv').config()
 
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-// mongoose.connect(process.env.DB_URL)
-mongoose.connect('mongodb+srv://prj666group9:jr2r996wK6JfEPW3@cluster0.gxqkt.mongodb.net/prj666group9db?retryWrites=true&w=majority')
+var port_number = app.listen(process.env.PORT || 3000);
+
+mongoose.connect(process.env.DB_URL)
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
@@ -24,4 +25,4 @@ app.use('/hardware', hardwareRouter)
 app.use('/articles', articleRouter)
 app.use('/requestService', requestServiceRouter)
 
-app.listen(3000, () => console.log('Server running...'))
+app.listen(port_number, () => console.log('Server running...'))
