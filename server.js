@@ -1,10 +1,11 @@
-require('dotenv').config()
+// require('dotenv').config()
 
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.DB_URL)
+// mongoose.connect(process.env.DB_URL)
+mongoose.connect('mongodb+srv://prj666group9:jr2r996wK6JfEPW3@cluster0.gxqkt.mongodb.net/prj666group9db?retryWrites=true&w=majority')
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
