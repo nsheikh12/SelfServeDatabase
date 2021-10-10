@@ -1,0 +1,122 @@
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users/6160aa69eafcc552aea01a64
+
+###
+
+GET http://localhost:3000/users/12
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "firstName": "Bob",
+    "lastName": "Bob",
+    "id": 1,
+    "email": "srogers@email.com",
+    "userName": "bob11",
+    "password": "password",
+    "isFaculty": true
+}
+
+### 
+DELETE http://localhost:3000/users/615e61d8ab8889b46dff04e8
+
+### 
+DELETE http://localhost:3000/users/6160640b3ff28c9222b413a7
+
+###
+POST http://localhost:3000/reportIssue
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Cena",
+    "email": "req.body.email",
+    "id": 1234,
+    "phone": "(415)-123-1234",
+    "userType": "Student",
+    "preferredContact": "email",
+    "availability": "monday-friday",
+    "subject": "Need help with installing VPN",
+    "problemDescription": "Hi, I'm having some issues with installing my VPN, need some help."
+}
+
+###
+GET http://localhost:3000/reportIssue
+
+###
+GET http://localhost:3000/reportIssue/61610f19460c5451b2f278a3
+
+### 
+DELETE http://localhost:3000/reportIssue/61610f19460c5451b2f278a3
+
+###
+POST http://localhost:3000/hardware
+Content-Type: application/json
+
+{
+   "equipmentName": "Macbook Pro 2021",
+   "quantity": 123,
+   "icon": "url link for the icon to be used"
+}
+
+###
+GET http://localhost:3000/hardware
+
+###
+GET http://localhost:3000/hardware/616112b0136820f7a18cb2ea
+
+### 
+DELETE http://localhost:3000/hardware/616112b0136820f7a18cb2ea
+
+
+###
+POST http://localhost:3000/requestService
+Content-Type: application/json
+
+{
+   "requestingPerson": "John Doe",
+    "id": 12345,
+    "equipment": "Macbook Pro 2016",
+    "duration": "2 months",
+    "program": "Computer Programming & Analysis",
+    "campus": "Newnham"
+}
+
+###
+GET http://localhost:3000/requestService
+
+###
+GET http://localhost:3000/requestService/6161dbb513a201143cfc4165
+
+### 
+DELETE http://localhost:3000/requestService/6161dbb513a201143cfc4165
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+   "submittedBy": "John Doe",
+    "articleNumber": "INC123456",
+    "requestingPerson": "John Doe",
+    "createdOn": "2021-10-09T13:49:51.141Z",
+    "category": "software",
+    "status": "new",
+    "assignedTo": "John Smith",
+    "articleTitle": "How to connect to VPN",
+    "body": "STEP1: step1, STEP2: step2"
+}
+
+###
+GET http://localhost:3000/articles
+
+###
+GET http://localhost:3000/articles/616116ae290982c9d8f37fff
+
+### 
+DELETE http://localhost:3000/articles/616116ae290982c9d8f37fff
