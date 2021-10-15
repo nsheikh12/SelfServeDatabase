@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+var cors = require('cors')
 
 var port_number = app.listen(process.env.PORT || 3000);
 
@@ -12,6 +13,7 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
+app.use(cors())
 
 const usersRouter = require('./controllers/userController')
 const reportIssueRouter = require('./controllers/reportIssueController')
