@@ -33,6 +33,18 @@ var fileFilter = function(req, file, cb) {
 // setting multer storage location and limits
 const upload = multer({storage: STORAGE, fileFilter: fileFilter, limits : { fileSize: 1024 * 1024 }});
 
+/* NODE MAILER SETUP */
+var nodemailer = require("nodemailer");
+require('dotenv').config()
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
 // Get all
 router.get('/', async (req, res) => {
     try {
@@ -66,6 +78,44 @@ router.post('/', upload.single('file'), async (req, res) => {
     try{
         const newIssue = await reportIssue.save()
         res.status(201).json(newIssue)
+
+           
+        let message = '<p>Hello, ' +req.body.firstName+ "! </p><br><p>Your ticket was successfully submitted, here is the ticket information: </p><br>"+
+        '<table border="1" class = "text">'+
+            '<thead>'+
+                '<tr>'+
+                    '<td>preferred contact</td>'+
+                    '<td>subject</td>'+
+                    '<td>problem description</td>'+
+                    '<td>availability</td>'+
+                '</tr>'+
+            '</thead>'+
+            '<tbody>'+
+                '<tr>'+
+                    '<td>'+req.body.preferredContact+'</td>'+
+                    '<td>'+req.body.subject+'</td>'+
+                    '<td>'+req.body.problemDescription+'</td>'+
+                    '<td>'+req.body.availability+'</td>'+
+                '</tr>'+
+            '</tbody>'+
+        '</table>'
+
+    var mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: req.body.email,
+        subject: 'ServiceTicket - Your issue ticket has been successfully submitted.',
+        html: message
+    }
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error){
+            console.log("ERROR: " + error);
+        }
+        else{
+            console.log("SUCCESS: " +info.response);
+        }
+    });    
+
+
     } catch (err) {
         res.status(400).json({ message : err.message })
     }
