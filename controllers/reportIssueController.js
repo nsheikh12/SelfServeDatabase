@@ -35,13 +35,28 @@ const upload = multer({storage: STORAGE, fileFilter: fileFilter, limits : { file
 
 /* NODE MAILER SETUP */
 var nodemailer = require("nodemailer");
+var {google} = require("googleapis")
 require('dotenv').config()
+
+const CLIENT_ID = "959511541170-4a4nr4ican3unqom343qdeoh785trg97.apps.googleusercontent.com"
+const CLIENT_SECRET = "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"
+const REDIRECT_URI = "https://developers.google.com/oauthplayground"
+const REFRESH_TOKEN = "1//043ASmeSFoBjFCgYIARAAGAQSNwF-L9Iroumjob_BkD7D6WnyG3T_nwkkvkTeLPu1agwVlV7mcq-rP2py7h57Sa7t4V_wV2JvhUk"
+
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
+
+const accessToken = oAuth2Client.getAccessToken()
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
+        type: 'OAuth2',
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken
     }
 });
 
