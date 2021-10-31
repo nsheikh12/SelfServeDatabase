@@ -2,6 +2,37 @@ const express = require('express')
 const router = express.Router()
 const ReportIssue = require('../models/reportIssueModel')
 
+/*MULTER SETUP*/
+const FILESDIRECTORY = "./files";
+const multer = require('multer')
+var path = require("path");
+var _ = require ("underscore");
+
+// multer storage
+const STORAGE = multer.diskStorage({
+    destination: FILESDIRECTORY,
+    filename: function(req, file, cb){
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+// file type limitations
+var fileFilter = function(req, file, cb) {
+  // supported image file mimetypes
+  var allowedMimes = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
+  
+  if (_.includes(allowedMimes, file.mimetype)) {
+  // allow supported image files
+  cb(null, true);
+  } else {
+  // throw error for invalid files
+  cb(new Error('Invalid file type. Only jpg, png and gif image files are allowed.'));
+  }
+};
+
+// setting multer storage location and limits
+const upload = multer({storage: STORAGE, fileFilter: fileFilter, limits : { fileSize: 1024 * 1024 }});
+
 // Get all
 router.get('/', async (req, res) => {
     try {
@@ -17,10 +48,9 @@ router.get('/:id', getIssue, (req, res) => {
     res.json(res.issue)
 })
 
-
 // Create one
-router.post('/', async (req, res) => {
-    const reportIssue = new ReportIssue({
+router.post('/', upload.single('file'), async (req, res) => {
+    const reportIssue = new ReportIssue ({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -30,9 +60,9 @@ router.post('/', async (req, res) => {
         preferredContact: req.body.preferredContact,
         availability: req.body.availability,
         subject: req.body.subject,
-        problemDescription: req.body.problemDescription
+        problemDescription: req.body.problemDescription,
+        file: req.file.path
     })
-
     try{
         const newIssue = await reportIssue.save()
         res.status(201).json(newIssue)

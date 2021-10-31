@@ -40,6 +40,13 @@ var ReportIssueSchema = new Schema({
     "problemDescription": {
         type: String,
         required: true
+    },
+    "file": {
+        type: String
+    },
+    "createdOn": {
+        type: Date,
+        default: Date.now()
     }
 });
 
