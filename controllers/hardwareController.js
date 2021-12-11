@@ -19,11 +19,16 @@ router.get('/:id', getHardware, (req, res) => {
 
 // Create one
 router.post('/', async (req, res) => {
-    const hardware = new Hardware({
-        equipmentName: req.body.equipmentName,
-        quantity: req.body.quantity,
-        icon: req.body.icon
-    })
+    const hardware = new Hardware(req.body)
+        // equipmentName: req.body.equipmentName,
+        // quantity: req.body.quantity,
+        // icon: req.body.icon
+    //const hardware = new Hardware({
+        //icon: req.body.icon,
+      //  equipmentName: req.body.equipmentName,
+       // quantity: req.body.quantity,
+      //  category: req.body.category
+    //})
 
     try{
         const newHardware = await hardware.save()
@@ -37,7 +42,14 @@ router.post('/', async (req, res) => {
 router.patch('/:id', getHardware, async (req, res) => {
     if (req.body.quantity != null) {
         res.hardware.quantity = req.body.quantity
+        
+
+
     }
+    res.hardware.equipmentName=req.body.equipmentName
+    res.hardware.comment=req.body.comment
+    res.hardware.category=req.body.category
+
     try {
         const updatedHardware = await res.hardware.save()
         res.json(updatedHardware)

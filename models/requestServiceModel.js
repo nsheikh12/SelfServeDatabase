@@ -11,6 +11,10 @@ var RequestServiceSchema = new Schema({
         type: Number,
         required: true
     },
+    "DateRented": {
+        type: String,
+        required: true
+    },
     "equipment": {
         type: String,
         required: true
@@ -21,9 +25,16 @@ var RequestServiceSchema = new Schema({
     "program": {
         type: String
     },
+    "email": {
+        type: String
+    },
     "campus": {
         type: String,
+    },
+    "DateReturned": {
+        type: String,
     }
+    
 });
 
 module.exports = mongoose.model("RequestService", RequestServiceSchema);

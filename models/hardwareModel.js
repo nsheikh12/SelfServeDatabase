@@ -11,6 +11,14 @@ var HardwareSchema = new Schema({
         type: Number,
         required: true
     },
+    "category": {
+        type: String,
+        
+    },
+    "comment": {
+        type: String,
+        
+    },
     "icon": {
         type: String
     }
