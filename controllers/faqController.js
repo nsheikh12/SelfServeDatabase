@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const FAQ = require('../models/FaqModel')
+const FAQ = require('../models/faqModel')
 
 
 // Get all
