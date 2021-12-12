@@ -149,23 +149,23 @@ router.post('/', (req, res) => {
                 if (err) {
                     res.status(400).json({ message: { msgBody: "There is something wrong with your information (400), please re-enter and try again. ", msgError: true } })
                 } else {
-                    const msg = {
-                        to: `${req.body.email}`, // Change to your recipient
-                        from: 'dmao6@myseneca.ca', // Change to your verified sender
-                        subject: 'ServiceTicket - Your issue ticket has been submitted',
-                        text: `Hi ${req.body.firstName}`,
-                        html: `Thank you for submitted a ticket. You should be contacted by an service agent soon. Description: ${req.body.description}`,
-                    }
-                    sgMail
-                    .send(msg)
-                    .then(() => {
-                        console.log('Email sent-submit')
-                        res.status(201).json({ message: { msgBody: "The ticket is created successfully! You will be redirected to the dashboard in a second!", msgError: false } });
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                        res.status(500).json({ message: { msgBody: "There is something wrong with your information (500), please re-enter and try again. ", msgError: true } });
-                    })
+                    // const msg = {
+                    //     to: `${req.body.email}`, // Change to your recipient
+                    //     from: 'dmao6@myseneca.ca', // Change to your verified sender
+                    //     subject: 'ServiceTicket - Your issue ticket has been submitted',
+                    //     text: `Hi ${req.body.firstName}`,
+                    //     html: `Thank you for submitted a ticket. You should be contacted by an service agent soon. Description: ${req.body.description}`,
+                    // }
+                    // sgMail
+                    // .send(msg)
+                    // .then(() => {
+                    //     console.log('Email sent-submit')
+                    //     res.status(201).json({ message: { msgBody: "The ticket is created successfully! You will be redirected to the dashboard in a second!", msgError: false } });
+                    // })
+                    // .catch((error) => {
+                    //     console.error(error)
+                    //     res.status(500).json({ message: { msgBody: "There is something wrong with your information (500), please re-enter and try again. ", msgError: true } });
+                    // })
 
                     // let message = '<p>Hello, ' + req.body.firstName + "! </p><br><p>Your ticket was successfully submitted, here is the ticket information: </p><br>" +
                     //     '<table border="1" class = "text">' +
@@ -229,21 +229,21 @@ router.patch('/:id', getTicket, async (req, res) => {
         res.json(updatedTicket)
         // send email if ticket is successfully closed
         if (req.body.status === "Closed") {
-            const msg = {
-                to: `${req.body.email}`, // Change to your recipient
-                from: 'dmao6@myseneca.ca', // Change to your verified sender
-                subject: 'ServiceTicket - Your issue ticket has been closed',
-                text: `Hi ${req.body.firstName}`,
-                html: `Your open issue ticket has been closed with the following comment: ${req.body.solution}`,
-            }
-            sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent-closed')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+            // const msg = {
+            //     to: `${req.body.email}`, // Change to your recipient
+            //     from: 'dmao6@myseneca.ca', // Change to your verified sender
+            //     subject: 'ServiceTicket - Your issue ticket has been closed',
+            //     text: `Hi ${req.body.firstName}`,
+            //     html: `Your open issue ticket has been closed with the following comment: ${req.body.solution}`,
+            // }
+            // sgMail
+            // .send(msg)
+            // .then(() => {
+            //     console.log('Email sent-closed')
+            // })
+            // .catch((error) => {
+            //     console.error(error)
+            // })
             // let message = '<p>Hello, ' + req.body.firstName + "! </p><br><p>Your ticket was successfully closed, here is the ticket information: </p><br>" +
             // '<table border="1" class = "text">' +
             // '<thead>' +
@@ -282,21 +282,21 @@ router.patch('/:id', getTicket, async (req, res) => {
             // });
         }
         else if(req.body.status==="Pending Client Response"){
-            const msg = {
-                to: `${req.body.email}`, // Change to your recipient
-                from: 'dmao6@myseneca.ca', // Change to your verified sender
-                subject: 'ServiceTicket - Requesting more information',
-                text: `Hi ${req.body.firstName}`,
-                html: `Your open issue ticket needs more information`,
-            }
-            sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent-more info')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+            // const msg = {
+            //     to: `${req.body.email}`, // Change to your recipient
+            //     from: 'dmao6@myseneca.ca', // Change to your verified sender
+            //     subject: 'ServiceTicket - Requesting more information',
+            //     text: `Hi ${req.body.firstName}`,
+            //     html: `Your open issue ticket needs more information`,
+            // }
+            // sgMail
+            // .send(msg)
+            // .then(() => {
+            //     console.log('Email sent-more info')
+            // })
+            // .catch((error) => {
+            //     console.error(error)
+            // })
             // let msg = {
             //     to: req.body.email, // Change to your recipient
             //     from: 'dmao6@myseneca.ca', // Change to your verified sender
@@ -352,38 +352,38 @@ router.patch('/:id', getTicket, async (req, res) => {
 
         }else{
             if(req.body.status==="Transfered"){
-            const msg = {
-                to: `${req.body.transferTo}`, // Change to your recipient
-                from: 'dmao6@myseneca.ca', // Change to your verified sender
-                subject: 'ServiceTicket - Requesting Attention',
-                text: `Hi ${req.body.transferTo}`,
-                html: `Ticket ${req.body.ticketNumber} need your attention`,
-            }
-            sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent-xFer')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+            // const msg = {
+            //     to: `${req.body.transferTo}`, // Change to your recipient
+            //     from: 'dmao6@myseneca.ca', // Change to your verified sender
+            //     subject: 'ServiceTicket - Requesting Attention',
+            //     text: `Hi ${req.body.transferTo}`,
+            //     html: `Ticket ${req.body.ticketNumber} need your attention`,
+            // }
+            // sgMail
+            // .send(msg)
+            // .then(() => {
+            //     console.log('Email sent-xFer')
+            // })
+            // .catch((error) => {
+            //     console.error(error)
+            // })
         }
         if(req.body.additionalEmail){
-            const msg = {
-                to: `${req.body.additionalEmail}`, // Change to your recipient
-                from: 'dmao6@myseneca.ca', // Change to your verified sender
-                subject: 'ServiceTicket - Requesting Attention',
-                text: `Hi ${req.body.transferTo}`,
-                html: `Ticket ${req.body.ticketNumber} need your attention`,
-            }
-            sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent-xFr-addEmail')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+            // const msg = {
+            //     to: `${req.body.additionalEmail}`, // Change to your recipient
+            //     from: 'dmao6@myseneca.ca', // Change to your verified sender
+            //     subject: 'ServiceTicket - Requesting Attention',
+            //     text: `Hi ${req.body.transferTo}`,
+            //     html: `Ticket ${req.body.ticketNumber} need your attention`,
+            // }
+            // sgMail
+            // .send(msg)
+            // .then(() => {
+            //     console.log('Email sent-xFr-addEmail')
+            // })
+            // .catch((error) => {
+            //     console.error(error)
+            // })
         }
         } 
     } catch (err) {
