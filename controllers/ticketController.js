@@ -160,9 +160,11 @@ router.post('/', (req, res) => {
                     .send(msg)
                     .then(() => {
                         console.log('Email sent-submit')
+                        res.status(201).json({ message: { msgBody: "The ticket is created successfully! You will be redirected to the dashboard in a second!", msgError: false } });
                     })
                     .catch((error) => {
                         console.error(error)
+                        res.status(500).json({ message: { msgBody: "There is something wrong with your information (500), please re-enter and try again. ", msgError: true } });
                     })
 
                     // let message = '<p>Hello, ' + req.body.firstName + "! </p><br><p>Your ticket was successfully submitted, here is the ticket information: </p><br>" +
