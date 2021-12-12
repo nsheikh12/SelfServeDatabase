@@ -160,7 +160,7 @@ router.post('/', (req, res) => {
                     // .send(msg)
                     // .then(() => {
                     //     console.log('Email sent-submit')
-                    //     res.status(201).json({ message: { msgBody: "The ticket is created successfully! You will be redirected to the dashboard in a second!", msgError: false } });
+                         res.status(201).json({ message: { msgBody: "The ticket is created successfully! You will be redirected to the dashboard in a second!", msgError: false } });
                     // })
                     // .catch((error) => {
                     //     console.error(error)
